@@ -10,10 +10,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
 def image_editor(logo):
 
-    img = cv2.imread(str(BASE_DIR / 'uploadimg\\static\\images\\shirt.jpg'))
-
-    logo.save("logo/logo.jpg")
-    watermark = cv2.imread(str(BASE_DIR / 'logo/logo.jpg'))
+    img = np.array(Image.open(BASE_DIR / 'uploadimg\\static\\images\\shirt.jpg'))
+    watermark = np.array(logo)
 
     percent_of_scaling = 50
     new_width = int(img.shape[1] * percent_of_scaling/100)
@@ -79,3 +77,13 @@ def image_editor(logo):
     img = Image.fromarray(resized_img)
 
     return img
+
+    filename = 'Watermakred_Image.jpg'
+
+    x = cv2.imwrite(filename, resized_img)
+
+    cv2.imshow("Resized Input Image", resized_img)
+
+    cv2.waitKey(0)
+
+    cv2.destroyAllWindows()
