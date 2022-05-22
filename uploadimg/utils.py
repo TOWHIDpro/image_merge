@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
 def image_editor(logo):
 
-    img = np.array(Image.open(BASE_DIR / 'uploadimg\\static\\images\\shirt.jpg'))
+    img = cv2.imread(str(BASE_DIR / 'uploadimg\\static\\images\\shirt.jpg'))
 
     watermark = np.array(logo)
 
