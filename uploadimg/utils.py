@@ -1,31 +1,29 @@
 import cv2
 from PIL import Image
-import numpy as np 
 print(cv2.__version__)
-
 from pathlib import Path
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
-def image_editor(logo):
+def image_editor(logo, color, position):
 
-    img = cv2.imread(str(BASE_DIR / 'uploadimg\\static\\images\\shirt.jpg'))
+    img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/shirt.jpg'))
 
-    logo.save("logo/logo.jpg")
+    Image.open(logo).save("logo/logo.jpg")
     watermark = cv2.imread(str(BASE_DIR / 'logo/logo.jpg'))
 
     percent_of_scaling = 50
     new_width = int(img.shape[1] * percent_of_scaling/100)
     new_height = int(img.shape[0] * percent_of_scaling/100)
     new_dim = (new_width, new_height)
-    print(new_dim)
+    print(new_dim, "new_dim")
     resized_img = cv2.resize(img, new_dim, interpolation=cv2.INTER_AREA)
 
     wm_w = watermark.shape[1]
     wm_h = watermark.shape[0]
     wm_dimension= (wm_w,wm_h)
-    print(wm_dimension)
+    print(wm_dimension, "wm_dimension")
 
     if wm_dimension < new_dim :
         wm_scale = 50
