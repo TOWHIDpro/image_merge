@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
-def image_editor(logo, color, position):
+def image_editor(logo, color, position, image_back):
 
     img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/shirt.jpg'))
 
