@@ -6,7 +6,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # cv2.imread('D:\\image_merge_project\\uploadimg\\templates\\shirt.jpg')
-def image_editor(logo, color, position, image_back):
+def image_editor(image_front, image_back, color, position):
 
     if (color=='red'):
         img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/red_shirt.jpg'))
@@ -15,10 +15,10 @@ def image_editor(logo, color, position, image_back):
     else:
         img = cv2.imread(str(BASE_DIR / 'uploadimg/static/images/black_shirt.jpg'))
     #####For Front#####
-    if logo:
+    if image_front:
         #### If pocket size has been choosen ####
         if (position=='pocket'):
-            Image.open(logo).save("logo/logo_front.png")
+            Image.open(image_front).save("logo/logo_front.png")
             pngimg = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
   
             cv2.imwrite('logo/logo_front.jpg', pngimg, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
@@ -89,11 +89,11 @@ def image_editor(logo, color, position, image_back):
             resized_img[top_y:bottom_y, left_x:right_x] = result
             filename = str(BASE_DIR / 'media/Front.jpg')
             cv2.imwrite(filename, resized_img)
-            img = Image.fromarray(resized_img)
+            img_f = Image.fromarray(resized_img)
 
         #### If chest size has been choosen ####
         else:
-            Image.open(logo).save("logo/logo_front.png")
+            Image.open(image_front).save("logo/logo_front.png")
             pngimg = cv2.imread(str(BASE_DIR / 'logo/logo_front.png'))
   
             cv2.imwrite('logo/logo_front.jpg', pngimg, [int(cv2.IMWRITE_JPEG_QUALITY), 100])
@@ -164,7 +164,7 @@ def image_editor(logo, color, position, image_back):
             resized_img[top_y:bottom_y, left_x:right_x] = result
             filename = str(BASE_DIR / 'media/Front.jpg')
             cv2.imwrite(filename, resized_img)
-            img = Image.fromarray(resized_img)
+            img_f = Image.fromarray(resized_img)
 
     ###################### For back of the t-shirt ##################
 
@@ -244,7 +244,8 @@ def image_editor(logo, color, position, image_back):
         resized_img[top_y:bottom_y, left_x:right_x] = result
         filename = str(BASE_DIR / 'media/back.jpg')
         cv2.imwrite(filename, resized_img)
-        img = Image.fromarray(resized_img)
+        img_b = Image.fromarray(resized_img)
+    else: img_b = None
+        
 
-        return img
-    return img
+    return img_f, img_b

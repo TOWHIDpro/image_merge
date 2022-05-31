@@ -1,7 +1,6 @@
-# Create your views here.
 from django.views import View
 from django.shortcuts import render, redirect
-from . models import Image
+from . models import ImageModel
 from .utils import image_editor
 
 
@@ -19,8 +18,10 @@ class index(View):
 
         if image_front == None and image_back == None:
             return redirect('index')
-
-        x = image_editor(image_front, color, position, image_back)
+        
+        img = ImageModel(img_front=image_front, img_back=image_back)
+        img.save(image_front, image_back, color, position)
+        print(img.img_front)
         return render(request, 'uploadimg/index.html', {
-            'img_front': image_front , 'img_back':image_back
+            'img_front': img.img_front , 'img_back': img.img_back
         })
